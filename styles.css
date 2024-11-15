@@ -23,12 +23,6 @@ body {
   padding: 20px;
 }
 
-.container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
 .hero-container {
   text-align: center;
   padding: 48px 24px;
@@ -36,8 +30,11 @@ body {
 
 .grid-wrapper {
   display: grid;
-  grid-template-columns: repeat(3, minmax(300px, 1fr));  /* Responsive columns, minimum 300px, expanding to fill space */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive columns, minimum 300px, expanding to fill space */
   gap: 30px;
+  padding: 20px;
+  max-width: 1280px;
+  margin: 0 auto; /* Centers the container */
 }
 
 .card {
