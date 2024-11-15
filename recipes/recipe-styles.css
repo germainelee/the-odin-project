@@ -1,0 +1,10 @@
+/* google font */
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+/* my styling goes here */
+body {
+    background-color: #FEF9E2;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    line-height: 1.6;
+  }
