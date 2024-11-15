@@ -7,15 +7,22 @@ body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     line-height: 1.6;
-    padding: 20px;
+    padding: 20px 20px 80px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .back-link {
     display: inline-block;
-    margin-bottom: 20px;
+    margin: 0 auto 20px;
     color: inherit;
     text-decoration: none;
     transition: all 0.3s ease;
+    text-align: center;
 }
 
 .back-link:hover {
@@ -23,8 +30,7 @@ body {
     color: #CC9543;
 }
 
-.container {
-    max-width: 800px;
+.details-container {
     margin: 0 auto;
     background: hsla(0, 0%, 100%, 0.4);
     padding: 30px;
@@ -54,7 +60,8 @@ img {
     margin-bottom: 20px;
 }
 
-.ingredients, .instructions {
+.ingredients,
+.instructions {
     margin-bottom: 30px;
 }
 
@@ -64,7 +71,7 @@ img {
 
 .ingredients-list li::marker {
     color: #CC9543;
-  }
+}
 
 .instructions-list li {
     margin-bottom: 15px;
