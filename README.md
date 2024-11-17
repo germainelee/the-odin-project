@@ -1,5 +1,5 @@
 # The Odin Project | Project files
-This is a list of the projects I crerated to complete the Foundations and Full Stack JavaScript courses on [The Odin Project](https://www.theodinproject.com/).
+This is a list of the projects I created to complete the Foundations and Full Stack JavaScript courses on [The Odin Project](https://www.theodinproject.com/).
 
 ## Foundations
 An introduction to all of the essential tools you'll need to build real, working websites. You'll learn what web developers actually do and the foundations you'll need for later courses. [See curriculum🔗](https://www.theodinproject.com/paths/foundations/courses/foundations)
