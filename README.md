@@ -3,9 +3,9 @@ This is a list of the projects I created to complete the Foundations and Full St
 
 ## Foundations
 An introduction to all of the essential tools you'll need to build real, working websites. You'll learn what web developers actually do and the foundations you'll need for later courses. [See curriculum🔗](https://www.theodinproject.com/paths/foundations/courses/foundations)
-1. Recipes ( [View code](https://github.com/germainelee/the-odin-project/tree/f12559dcff9767d3abc70620ddcbd3e07b16ed0e/1%20-%20Basic%20recipe%20website) | [Preview](https://germainelee.github.io/the-odin-project/1%20-%20Basic%20recipe%20website/) )
-2. Landing Page ( [View code](https://github.com/germainelee/the-odin-project/tree/f12559dcff9767d3abc70620ddcbd3e07b16ed0e/2%20-%20Lading%20page) | [Preview](https://germainelee.github.io/the-odin-project/2%20-%20Lading%20page/) )
-3. Rock Paper Scissors ( View code | Preview )
+1. Recipes ( [View code](https://github.com/germainelee/the-odin-project/tree/main/1%20-%20Basic%20recipe%20website) | [Preview](https://germainelee.github.io/the-odin-project/1%20-%20Basic%20recipe%20website/) )
+2. Landing Page ( [View code](https://github.com/germainelee/the-odin-project/tree/main/2%20-%20Lading%20page) | [Preview](https://germainelee.github.io/the-odin-project/2%20-%20Lading%20page/) )
+3. Rock Paper Scissors ( [View code](https://github.com/germainelee/the-odin-project/tree/main/3%20-%20Rock%20Paper%20Scissors) | [Preview](https://germainelee.github.io/the-odin-project/3%20-%20Rock%20Paper%20Scissors/) )
 4. Etch-a-Sketch ( View code | Preview )
 5. Calculator ( View code | Preview )
 
