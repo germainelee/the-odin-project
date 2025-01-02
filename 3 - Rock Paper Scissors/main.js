@@ -1,18 +1,20 @@
 let playerScore = 0;
 let computerScore = 0;
 let currentRound = 1;
-const TOTAL_ROUNDS = 5;
+let selectedChoice = null;
+let isGameOver = false;
 
 // Get DOM elements
 const choiceBtns = document.querySelectorAll('.choice-btn');
-const roundCounter = document.getElementById('roundInfo')
+const roundCounter = document.getElementById('roundInfo');
 const choicesDisplay = document.getElementById('choices')
 const roundResultText = document.getElementById('roundResult')
 const scoreMessage = document.getElementById('score');
 const finalResultText = document.getElementById('finalResult');
 const restartBtn = document.getElementById('newGameBtn')
 
-const choices = {
+// choices object to store both names and emojis
+const emojiChoices = {
     rockBtn: { name: 'rock', emoji: '✊' },
     paperBtn: { name: 'paper', emoji: '✋' },
     scissorsBtn: { name: 'scissors', emoji: '✌' }
@@ -24,96 +26,86 @@ function updateScoreDisplay() {
 
 function getComputerChoice() {
     const random = Math.random();
+    // Return the complete choice object
     if (random < 0.33) {
-        return choices.rockBtn;
+        return emojiChoices.rockBtn;
     } else if (random < 0.66) {
-        return choices.paperBtn;
+        return emojiChoices.paperBtn;
     } else {
-        return choices.scissorsBtn;
+        return emojiChoices.scissorsBtn;
     }
 }
 
 function getPlayerChoice(choice) {
+    if (isGameOver) return null;
+
     // Validate the choice
     if (choice === 'rock' || choice === 'paper' || choice === 'scissors') {
         // Remove selected class from all buttons
-        document.querySelectorAll('button').forEach(btn => {
-            btn.classList.remove('selected');
-        });
-
+        choiceBtns.forEach(btn => btn.classList.remove('selected'));
         // Add selected class to clicked button
         document.getElementById(`${choice}Btn`).classList.add('selected');
 
+        selectedChoice = choice;
         return choice;
     }
     else {
-    //     document.getElementById('error').textContent = 'Please select Rock, Paper, or Scissors';
+        //     document.getElementById('error').textContent = 'Please select Rock, Paper, or Scissors';
         return null;
     }
 }
 
 function playRound(playerChoice, computerChoice) {
-    if (playerChoice === computerChoice) {
+    if (playerChoice.name === computerChoice.name) {
         return "It's a tie!";
     }
-    
-    if (
-        (playerChoice === 'rock' && computerChoice === 'scissors') ||
-        (playerChoice === 'paper' && computerChoice === 'rock') ||
-        (playerChoice === 'scissors' && computerChoice === 'paper')
+
+    else if (
+        (playerChoice.name === 'rock' && computerChoice.name === 'scissors') ||
+        (playerChoice.name === 'paper' && computerChoice.name === 'rock') ||
+        (playerChoice.name === 'scissors' && computerChoice.name === 'paper')
     ) {
         playerScore++;
-        return 'You win!';
+        return 'You win this round!';
     }
 
-    computerScore++;
-    return 'Computer wins!';
-
+    else {
+        computerScore++;
+        return 'Computer wins this round!';
+    }
 }
 
 function determineWinner() {
-    if (playerScore > computerScore) {
-        return "🎉 Congratulations! You've won the game!";
-    } else if (computerScore > playerScore) {
-        return "The computer has won the game.";
-    } else {
-        return "It's a tie game!";
+    if (playerScore >= 5 || computerScore >= 5) {
+        isGameOver = true;
+        const winner = playerScore >= 5 ? "🎉 Congratulations! You've" : "Computer has";
+        finalResultText.textContent = `${winner} won the game!`;
+        roundResultText.innerHTML = 'THE END.\nThank you for playing.';
+
+        // Disable game buttons and show new game button
+        choiceBtns.forEach(btn => btn.disabled = true);
+        restartBtn.style.display = 'inline-block';
     }
 }
 
 function playGame(event) {
-    if (currentRound > TOTAL_ROUNDS) return;
-
     const buttonId = event.currentTarget.id;
-    const playerSelection = choices[buttonId];
-    // if (!playerSelection) return;
-    const computerSelection = getComputerChoice();
-    
-    // Remove selected class from all buttons
-    choiceBtns.forEach(btn=>btn.classList.remove('selected'));
-    // Add selected class to clicked button
-    event.currentTarget.classList.add('selected');
+    const playerSelection = emojiChoices[buttonId];
 
-    const roundResult = playRound(playerSelection, computerSelection);
+    if (playerSelection) {
+        const computerSelection = getComputerChoice();
+        const roundResult = playRound(playerSelection, computerSelection);
 
-    choicesDisplay.innerHTML = `You chose ${playerSelection.emoji} ${playerSelection.name.toUpperCase()} <br/>Computer chose ${computerSelection.emoji} ${computerSelection.name.toUpperCase()}`;
-    roundResultText.innerHTML = roundResult;
-    updateScoreDisplay();
+        choicesDisplay.innerHTML =
+            `You chose ${playerSelection.emoji} ${playerSelection.name}<br/>` +
+            `Computer chose ${computerSelection.emoji} ${computerSelection.name}`;
+        roundResultText.innerHTML = roundResult;
+        updateScoreDisplay();
 
-    currentRound++;
+        currentRound++;
+        roundCounter.textContent = `Number of rounds: ${currentRound}`;
 
-    if (currentRound <= TOTAL_ROUNDS) {
-        roundCounter.textContent = `Round ${currentRound} of ${TOTAL_ROUNDS} `;
-    } else {
-        const gameResult = determineWinner();
-        finalResultText.textContent = gameResult;
-        roundResultText.innerHTML = 'THE END.\nThank you for playing.';
-        
-        // Disable game buttons and show new game button
-        choiceBtns.forEach(btn => {
-            btn.disabled = true;
-        });
-        restartBtn.style.display = 'inline-block';
+        determineWinner();
     }
 }
 
@@ -122,9 +114,11 @@ function resetGame() {
     playerScore = 0;
     computerScore = 0;
     currentRound = 1;
+    selectedChoice = null;
+    isGameOver = false;
 
     // Reset UI
-    roundCounter.textContent = `Round ${currentRound} of ${TOTAL_ROUNDS} `;
+    roundCounter.textContent = `Number of rounds: ${currentRound}`;
     choicesDisplay.innerHTML = '';
     roundResultText.innerHTML = '';
     updateScoreDisplay();
@@ -141,6 +135,11 @@ function resetGame() {
 
 // Add event listeners
 choiceBtns.forEach(button => {
+    // button.addEventListener('click', (e) => {
+    //     const choice = e.target.closest('.choice-btn').id.replace('Btn', '').toLowerCase();
+    //     playGame(choice);
+    // });
+
     button.addEventListener('click', playGame);
 });
 
