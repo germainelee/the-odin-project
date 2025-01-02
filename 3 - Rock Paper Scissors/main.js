@@ -3,29 +3,33 @@ let computerScore = 0;
 let currentRound = 1;
 const TOTAL_ROUNDS = 5;
 
-// UI
+// Get DOM elements
+const choiceBtns = document.querySelectorAll('.choice-btn');
 const roundCounter = document.getElementById('roundInfo')
-const selectedChoice = document.getElementById('choices')
+const choicesDisplay = document.getElementById('choices')
 const roundResultText = document.getElementById('roundResult')
 const scoreMessage = document.getElementById('score');
 const finalResultText = document.getElementById('finalResult');
 const restartBtn = document.getElementById('newGameBtn')
 
+const choices = {
+    rockBtn: { name: 'rock', emoji: '✊' },
+    paperBtn: { name: 'paper', emoji: '✋' },
+    scissorsBtn: { name: 'scissors', emoji: '✌' }
+};
+
 function updateScoreDisplay() {
     scoreMessage.innerHTML = `Score - You: ${playerScore} Computer: ${computerScore}`;
 }
 
-// Initialize score display when page loads
-updateScoreDisplay();
-
 function getComputerChoice() {
     const random = Math.random();
     if (random < 0.33) {
-        return 'rock';
+        return choices.rockBtn;
     } else if (random < 0.66) {
-        return 'paper';
+        return choices.paperBtn;
     } else {
-        return 'scissors';
+        return choices.scissorsBtn;
     }
 }
 
@@ -77,16 +81,22 @@ function determineWinner() {
     }
 }
 
-function playGame(choice) {
+function playGame(event) {
     if (currentRound > TOTAL_ROUNDS) return;
 
-    const playerSelection = getPlayerChoice(choice);
-    if (!playerSelection) return;
-
+    const buttonId = event.currentTarget.id;
+    const playerSelection = choices[buttonId];
+    // if (!playerSelection) return;
     const computerSelection = getComputerChoice();
+    
+    // Remove selected class from all buttons
+    choiceBtns.forEach(btn=>btn.classList.remove('selected'));
+    // Add selected class to clicked button
+    event.currentTarget.classList.add('selected');
+
     const roundResult = playRound(playerSelection, computerSelection);
 
-    selectedChoice.innerHTML = `You chose ${playerSelection}<br/>Computer chose ${computerSelection}`;
+    choicesDisplay.innerHTML = `You chose ${playerSelection.emoji} ${playerSelection.name.toUpperCase()} <br/>Computer chose ${computerSelection.emoji} ${computerSelection.name.toUpperCase()}`;
     roundResultText.innerHTML = roundResult;
     updateScoreDisplay();
 
@@ -100,7 +110,7 @@ function playGame(choice) {
         roundResultText.innerHTML = 'THE END.\nThank you for playing.';
         
         // Disable game buttons and show new game button
-        document.querySelectorAll('.buttons button').forEach(btn => {
+        choiceBtns.forEach(btn => {
             btn.disabled = true;
         });
         restartBtn.style.display = 'inline-block';
@@ -108,7 +118,6 @@ function playGame(choice) {
 }
 
 function resetGame() {
-
     // Reset scores and round
     playerScore = 0;
     computerScore = 0;
@@ -116,16 +125,26 @@ function resetGame() {
 
     // Reset UI
     roundCounter.textContent = `Round ${currentRound} of ${TOTAL_ROUNDS} `;
-    selectedChoice.innerHTML = '';
+    choicesDisplay.innerHTML = '';
     roundResultText.innerHTML = '';
     updateScoreDisplay();
     finalResultText.textContent = '';
 
-    document.querySelectorAll('.buttons button').forEach(btn => {
+    choiceBtns.forEach(btn => {
         btn.disabled = false;
         btn.classList.remove('selected');
     });
 
     // hide newGameBtn
-    document.getElementById('newGameBtn').style.display = 'none';
+    restartBtn.style.display = 'none';
 }
+
+// Add event listeners
+choiceBtns.forEach(button => {
+    button.addEventListener('click', playGame);
+});
+
+restartBtn.addEventListener('click', resetGame);
+
+// Initialize score display when page loads
+updateScoreDisplay();
