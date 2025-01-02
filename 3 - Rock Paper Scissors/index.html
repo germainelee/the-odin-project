@@ -16,22 +16,23 @@
             <span>LET'S PLAY</span><br />
             Rock Paper Scissors
         </h1>
+        <h4>Note: First to 5 points wins!</h4>
     </header>
     <div class="game-container">
         <div class="stats-container">
-            <div class="round-info" id="roundInfo">Round 1 of 5</div>
+            <div class="round-info" id="roundInfo">Number of rounds: 1</div>
             <div class="score" id="score"></div>
         </div>
-        
+
         <div class="buttons">
-            <button onclick="playGame('rock')" id="rockBtn"><span>✊</span><br />Rock</button>
-            <button onclick="playGame('paper')" id="paperBtn"><span>✋</span><br />Paper</button>
-            <button onclick="playGame('scissors')" id="scissorsBtn"><span>✌</span><br />Scissors</button>
+            <button class="choice-btn" id="rockBtn"><span>✊</span><br />Rock</button>
+            <button class="choice-btn" id="paperBtn"><span>✋</span><br />Paper</button>
+            <button class="choice-btn" id="scissorsBtn"><span>✌</span><br />Scissors</button>
         </div>
         <div class="choices" id="choices"></div>
         <div class="round-result" id="roundResult"></div>
         <div class="final-result" id="finalResult"></div>
-        <button onclick="resetGame()" class="new-game-btn" id="newGameBtn" style="display: none;">Play Again</button>
+        <button class="new-game-btn" id="newGameBtn" style="display: none;">Play Again</button>
     </div>
     <script src="main.js"></script>
 </body>

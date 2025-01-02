@@ -1,131 +1,149 @@
 let playerScore = 0;
 let computerScore = 0;
 let currentRound = 1;
-const TOTAL_ROUNDS = 5;
+let selectedChoice = null;
+let isGameOver = false;
 
-// UI
-const roundCounter = document.getElementById('roundInfo')
-const selectedChoice = document.getElementById('choices')
+// Get DOM elements
+const choiceBtns = document.querySelectorAll('.choice-btn');
+const roundCounter = document.getElementById('roundInfo');
+const choicesDisplay = document.getElementById('choices')
 const roundResultText = document.getElementById('roundResult')
 const scoreMessage = document.getElementById('score');
 const finalResultText = document.getElementById('finalResult');
 const restartBtn = document.getElementById('newGameBtn')
 
+// choices object to store both names and emojis
+const emojiChoices = {
+    rockBtn: { name: 'rock', emoji: '✊' },
+    paperBtn: { name: 'paper', emoji: '✋' },
+    scissorsBtn: { name: 'scissors', emoji: '✌' }
+};
+
 function updateScoreDisplay() {
     scoreMessage.innerHTML = `Score - You: ${playerScore} Computer: ${computerScore}`;
 }
 
-// Initialize score display when page loads
-updateScoreDisplay();
-
 function getComputerChoice() {
     const random = Math.random();
+    // Return the complete choice object
     if (random < 0.33) {
-        return 'rock';
+        return emojiChoices.rockBtn;
     } else if (random < 0.66) {
-        return 'paper';
+        return emojiChoices.paperBtn;
     } else {
-        return 'scissors';
+        return emojiChoices.scissorsBtn;
     }
 }
 
 function getPlayerChoice(choice) {
+    if (isGameOver) return null;
+
     // Validate the choice
     if (choice === 'rock' || choice === 'paper' || choice === 'scissors') {
         // Remove selected class from all buttons
-        document.querySelectorAll('button').forEach(btn => {
-            btn.classList.remove('selected');
-        });
-
+        choiceBtns.forEach(btn => btn.classList.remove('selected'));
         // Add selected class to clicked button
         document.getElementById(`${choice}Btn`).classList.add('selected');
 
+        selectedChoice = choice;
         return choice;
     }
     else {
-    //     document.getElementById('error').textContent = 'Please select Rock, Paper, or Scissors';
+        //     document.getElementById('error').textContent = 'Please select Rock, Paper, or Scissors';
         return null;
     }
 }
 
 function playRound(playerChoice, computerChoice) {
-    if (playerChoice === computerChoice) {
+    if (playerChoice.name === computerChoice.name) {
         return "It's a tie!";
     }
-    
-    if (
-        (playerChoice === 'rock' && computerChoice === 'scissors') ||
-        (playerChoice === 'paper' && computerChoice === 'rock') ||
-        (playerChoice === 'scissors' && computerChoice === 'paper')
+
+    else if (
+        (playerChoice.name === 'rock' && computerChoice.name === 'scissors') ||
+        (playerChoice.name === 'paper' && computerChoice.name === 'rock') ||
+        (playerChoice.name === 'scissors' && computerChoice.name === 'paper')
     ) {
         playerScore++;
-        return 'You win!';
+        return 'You win this round!';
     }
 
-    computerScore++;
-    return 'Computer wins!';
-
+    else {
+        computerScore++;
+        return 'Computer wins this round!';
+    }
 }
 
 function determineWinner() {
-    if (playerScore > computerScore) {
-        return "🎉 Congratulations! You've won the game!";
-    } else if (computerScore > playerScore) {
-        return "The computer has won the game.";
-    } else {
-        return "It's a tie game!";
-    }
-}
-
-function playGame(choice) {
-    if (currentRound > TOTAL_ROUNDS) return;
-
-    const playerSelection = getPlayerChoice(choice);
-    if (!playerSelection) return;
-
-    const computerSelection = getComputerChoice();
-    const roundResult = playRound(playerSelection, computerSelection);
-
-    selectedChoice.innerHTML = `You chose ${playerSelection}<br/>Computer chose ${computerSelection}`;
-    roundResultText.innerHTML = roundResult;
-    updateScoreDisplay();
-
-    currentRound++;
-
-    if (currentRound <= TOTAL_ROUNDS) {
-        roundCounter.textContent = `Round ${currentRound} of ${TOTAL_ROUNDS} `;
-    } else {
-        const gameResult = determineWinner();
-        finalResultText.textContent = gameResult;
+    if (playerScore >= 5 || computerScore >= 5) {
+        isGameOver = true;
+        const winner = playerScore >= 5 ? "🎉 Congratulations! You've" : "Computer has";
+        finalResultText.textContent = `${winner} won the game!`;
         roundResultText.innerHTML = 'THE END.\nThank you for playing.';
-        
+
         // Disable game buttons and show new game button
-        document.querySelectorAll('.buttons button').forEach(btn => {
-            btn.disabled = true;
-        });
+        choiceBtns.forEach(btn => btn.disabled = true);
         restartBtn.style.display = 'inline-block';
     }
 }
 
-function resetGame() {
+function playGame(event) {
+    const buttonId = event.currentTarget.id;
+    const playerSelection = emojiChoices[buttonId];
 
+    if (playerSelection) {
+        const computerSelection = getComputerChoice();
+        const roundResult = playRound(playerSelection, computerSelection);
+
+        choicesDisplay.innerHTML =
+            `You chose ${playerSelection.emoji} ${playerSelection.name}<br/>` +
+            `Computer chose ${computerSelection.emoji} ${computerSelection.name}`;
+        roundResultText.innerHTML = roundResult;
+        updateScoreDisplay();
+
+        currentRound++;
+        roundCounter.textContent = `Number of rounds: ${currentRound}`;
+
+        determineWinner();
+    }
+}
+
+function resetGame() {
     // Reset scores and round
     playerScore = 0;
     computerScore = 0;
     currentRound = 1;
+    selectedChoice = null;
+    isGameOver = false;
 
     // Reset UI
-    roundCounter.textContent = `Round ${currentRound} of ${TOTAL_ROUNDS} `;
-    selectedChoice.innerHTML = '';
+    roundCounter.textContent = `Number of rounds: ${currentRound}`;
+    choicesDisplay.innerHTML = '';
     roundResultText.innerHTML = '';
     updateScoreDisplay();
     finalResultText.textContent = '';
 
-    document.querySelectorAll('.buttons button').forEach(btn => {
+    choiceBtns.forEach(btn => {
         btn.disabled = false;
         btn.classList.remove('selected');
     });
 
     // hide newGameBtn
-    document.getElementById('newGameBtn').style.display = 'none';
+    restartBtn.style.display = 'none';
 }
+
+// Add event listeners
+choiceBtns.forEach(button => {
+    // button.addEventListener('click', (e) => {
+    //     const choice = e.target.closest('.choice-btn').id.replace('Btn', '').toLowerCase();
+    //     playGame(choice);
+    // });
+
+    button.addEventListener('click', playGame);
+});
+
+restartBtn.addEventListener('click', resetGame);
+
+// Initialize score display when page loads
+updateScoreDisplay();
