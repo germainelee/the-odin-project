@@ -11,7 +11,17 @@ If the player wins, they gain 1 point. If the computer wins, the computer gain 1
 3. Scissors beats Paper
 
 ## To do
-- [ ] Improve styling
-- [ ] Add confetti when player wins game
+- [ ] Improve layout
 - [ ] Add button click sound effect
-- [ ] Responsive web design
+- [ ] Add background music
+- [ ] Responsive design
+### Stretch goal
+- [ ] Celebrate when player wins game (e.g. confetti)
+- [ ] Stylise UI (e.g. pixel art, sci-fi)
+- [ ] Option to change theme to fire, water, earth (e.g. pokemon, avatar)
+- [ ] Add UI animation ([example](https://www.artstation.com/artwork/GaN6yN))
+- [ ] Add background image
+- [ ] Add start game screen
+- [ ] Add rock-paper-scissors chant UI "timer", failing to select leads to losing the round
+- [ ] Calculate kill-death ratio in end game screen ([KDR example](https://preview.redd.it/whats-everyones-kills-to-death-ratio-like-v0-j9kb6ca347xb1.jpg?width=1080&crop=smart&auto=webp&s=d53763b77bb1f55288bc1b410e915d0c6c32f6c5))
+- [ ] Mute/Unmute audio settings
