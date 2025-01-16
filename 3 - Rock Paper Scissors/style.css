@@ -2,9 +2,10 @@
     --primary: #FC8B36;
     --primary-hover: hsl(185, 73%, 47%);
     --secondary: white;
-    --interactive: rgba(255, 255, 255, 0.4);
+    --interactive: rgba(255, 255, 255, 1);
     --content-primary: #0e0f0c;
-    --background: hsl(185, 100%, 21%);
+    --background: #2D54B2;
+    --cell-background: #3766D8;
     --background-neutral: rgba(255, 255, 255, 0.9);
 }
 
@@ -22,10 +23,21 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-size: 1.125rem;
     line-height: 1.6;
-    background-color: var(--background);
     color: var(--content-primary);
     font-weight: 400;
     color: var(--secondary);
+    background-color: var(--background);
+    background-image: linear-gradient(135deg, var(--cell-background) 25%, transparent 25%),
+        linear-gradient(225deg, var(--cell-background) 25%, transparent 25%),
+        linear-gradient(45deg, var(--cell-background) 25%, transparent 25%),
+        linear-gradient(315deg, var(--cell-background) 25%, var(--background) 25%);
+    background-position:
+        24px 0,
+        24px 0,
+        0 0,
+        0 0;
+    background-size: 24px 24px;
+    background-repeat: repeat;
 }
 
 .game-container {
@@ -41,7 +53,7 @@ body {
     align-items: center;
     justify-content: center;
     padding: 40px 0px;
-    gap:20px;
+    gap: 20px;
     color: var(--content-primary);
     background-color: var(--background-neutral);
 }
@@ -58,7 +70,7 @@ body {
     text-align: center;
     font-weight: 900;
     color: var(--primary);
-    line-height:normal;
+    line-height: normal;
 }
 
 .stats-container {

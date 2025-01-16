@@ -10,6 +10,13 @@ If the player wins, they gain 1 point. If the computer wins, the computer gain 1
 2. Rock beats Scissors
 3. Scissors beats Paper
 
+## Credits
+"Blippy Trance" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/
+
+Sound Effect by <a href="https://pixabay.com/users/lesiakower-25701529/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=145251">Lesiakower</a> from <a href="https://pixabay.com/sound-effects//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=145251">Pixabay</a>
+
 ## To do
 - [ ] Improve layout
 - [ ] Add button click sound effect

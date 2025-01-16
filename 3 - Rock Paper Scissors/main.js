@@ -13,6 +13,22 @@ const scoreMessage = document.getElementById('score');
 const finalResultText = document.getElementById('finalResult');
 const restartBtn = document.getElementById('newGameBtn')
 
+// Setup audio elements
+const buttonClickSound = new Howl({
+    src: ['./click-sound-effect.mp3']
+});
+
+window.onload = function () {
+    // not working
+    // const musicAudio = new HTMLUnknownElement({
+    //     src: ['./BlippyTrance.mp3'],
+    //     autoplay: true,
+    //     loop: true,
+    // })
+
+    // musicAudio.play();
+}
+
 // choices object to store both names and emojis
 const emojiChoices = {
     rockBtn: { name: 'rock', emoji: '✊' },
@@ -21,6 +37,7 @@ const emojiChoices = {
 };
 
 function updateScoreDisplay() {
+    // update score display
     scoreMessage.innerHTML = `Score - You: ${playerScore} Computer: ${computerScore}`;
 }
 
@@ -93,6 +110,8 @@ function playGame(event) {
     const playerSelection = emojiChoices[buttonId];
 
     if (playerSelection) {
+        buttonClickSound.play();
+
         const computerSelection = getComputerChoice();
         const roundResult = playRound(playerSelection, computerSelection);
 
