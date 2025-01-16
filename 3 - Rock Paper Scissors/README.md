@@ -10,6 +10,13 @@ If the player wins, they gain 1 point. If the computer wins, the computer gain 1
 2. Rock beats Scissors
 3. Scissors beats Paper
 
+### Screen flow
+To make it feel more game-like, it would look something like this eventually.
+1. Powered-off game device (e.g. gameboy, tamagotchi, Rabbit R1)
+2. Click 'power' button to switch on the device
+3. When 'power' button has been clicked, it hides from view till end of game
+4. Game is visible and music starts playing
+
 ## Credits
 "Blippy Trance" Kevin MacLeod (incompetech.com)
 Licensed under Creative Commons: By Attribution 4.0 License
@@ -28,7 +35,7 @@ Sound Effect by <a href="https://pixabay.com/users/lesiakower-25701529/?utm_sour
 - [ ] Option to change theme to fire, water, earth (e.g. pokemon, avatar)
 - [ ] Add UI animation ([example](https://www.artstation.com/artwork/GaN6yN))
 - [ ] Add background image
-- [ ] Add start game screen
+- [ ] Implement [Screen flow](#screen-flow)
 - [ ] Add rock-paper-scissors chant UI "timer", failing to select leads to losing the round
 - [ ] Calculate kill-death ratio in end game screen ([KDR example](https://preview.redd.it/whats-everyones-kills-to-death-ratio-like-v0-j9kb6ca347xb1.jpg?width=1080&crop=smart&auto=webp&s=d53763b77bb1f55288bc1b410e915d0c6c32f6c5))
 - [ ] Mute/Unmute audio settings
