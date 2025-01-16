@@ -1,5 +1,5 @@
 ## The challenge
-Create the game Rock Paper Scissors. By the end of the 5 round of game, it will conclude if you’re winning or losing in the whole set of the game.
+Create the game Rock Paper Scissors. First to 5 points wins the game.
 
 > Note: This is the first JavaScript project being built from scratch
 
