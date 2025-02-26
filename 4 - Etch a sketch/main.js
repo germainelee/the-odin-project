@@ -1,6 +1,7 @@
 // Get DOM elements
 const gridContainer = document.getElementById("grid-container");
 const resetButton = document.getElementById("reset");
+const gridSizeDisplay = document.getElementById("grid-size-display");
 
 let gridSize = 16; // Creating a sqaure grid with N rows and columns
 let isMouseDown = false; // Track if the mouse button is pressed
@@ -29,6 +30,9 @@ function createGrid(size) {
 
     gridContainer.appendChild(square);
   }
+
+  // Update the grid size display
+  gridSizeDisplay.textContent = `${size} x ${size}`;
 }
 
 // Track mouse state
