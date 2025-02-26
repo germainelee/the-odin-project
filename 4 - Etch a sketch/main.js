@@ -76,11 +76,16 @@ function handleMouseEvent(event) {
 
 // Prompt for new grid size
 function resetGrid() {
-  console.log("button click");
   let newSize = prompt(
     "Enter the number of squares per side for the new grid (max 100):",
     "8"
   );
+
+  // If the user clicks "Cancel", return early
+  if (newSize === null) {
+    return;
+  }
+
   let parsedSize = parseInt(newSize);
 
   if (parsedSize && parsedSize > 0 && parsedSize <= 100) {
