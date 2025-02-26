@@ -42,17 +42,22 @@ gridContainer.addEventListener("mouseup", () => {
   isMouseDown = false;
 });
 
+// Function to generate a random hex color
+function getRandomColor() {
+  return Math.floor(Math.random() * 16777215).toString(16);
+}
+
 function handleMouseEvent(event) {
   if (event.type == "mousedown") {
-    event.target.style.background = "#333333"; // Color the square on click
+    event.target.style.background = "#" + getRandomColor(); // Color the square on click
   } else if (event.type == "mouseover") {
     // If the square is unstyled (no background color), set it to #e0e0e0
     if (!event.target.style.background) {
       event.target.style.background = "#e0e0e0";
     }
-    // If the mouse is down, color the square pink
+    // If the mouse is down, color the square
     if (isMouseDown) {
-      event.target.style.background = "#333333";
+      event.target.style.background = "#" + getRandomColor();
     }
   }
   // If the square is unstyled, reset its background
@@ -67,8 +72,21 @@ function handleMouseEvent(event) {
   }
 }
 
+// Prompt for new grid size
 function resetGrid() {
   console.log("button click");
+  let newSize = prompt(
+    "Enter the number of squares per side for the new grid (max 100):",
+    "8"
+  );
+  let parsedSize = parseInt(newSize);
+
+  if (parsedSize && parsedSize > 0 && parsedSize <= 100) {
+    gridSize = parsedSize;
+    createGrid(gridSize);
+  } else {
+    alert("Please enter a valid number between 1 and 100");
+  }
 }
 
 // Initial grid creation
