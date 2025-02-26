@@ -3,7 +3,6 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* height: 100vh; */
   margin: 0;
   background-color: #f0f0f0;
   font-family: Arial, sans-serif;
@@ -11,13 +10,16 @@ body {
 
 .container {
   text-align: center;
+  width: 100%;
+  max-width: 960px; /* Limit the maximum width of the container */
+  padding: 20px;
+  box-sizing: border-box; /* Ensures that borders and padding are included in the element's dimensions, preventing layout issues. */
 }
 
 #grid-container {
-  display: flex;
-  flex-wrap: wrap;
-  width: 960px;
-  height: 960px;
+  display: grid;
+  width: 100%; /* Make the grid container responsive */
+  aspect-ratio: 1 / 1; /* Ensure the grid remains square, regardless of its width */
   border: 1px solid #000;
   margin-top: 20px;
 }

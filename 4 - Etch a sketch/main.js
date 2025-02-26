@@ -2,8 +2,7 @@
 const gridContainer = document.getElementById("grid-container");
 const resetButton = document.getElementById("reset");
 
-// Creating a sqaure grid with N rows and columns
-let gridSize = 16;
+let gridSize = 16; // Creating a sqaure grid with N rows and columns
 let isMouseDown = false; // Track if the mouse button is pressed
 
 // Creates grid squares (which is set to `gridSize` when called)
@@ -14,15 +13,14 @@ function createGrid(size) {
     "num of Row/Column: " + gridSize + "\ntotalSquares: " + totalSquares
   );
 
-  // Each square's size is calculated based on the total width divided by the number of squares per side
-  const squareSize = 960 / size;
+  // Squares size automatically resize to fit container's width
+  gridContainer.style.gridTemplateColumns = `repeat(${size}, 1fr)`; // Use CSS Grid
+  gridContainer.style.gridTemplateRows = `repeat(${size}, 1fr)`; // Use CSS Grid
 
   for (let i = 0; i < totalSquares; i++) {
     // Create div element and append each square
     const square = document.createElement("div");
     square.classList.add("grid-square");
-    square.style.width = `${squareSize}px`;
-    square.style.height = `${squareSize}px`;
 
     // Use a single event handler function for mouse events
     square.addEventListener("mouseover", handleMouseEvent);
