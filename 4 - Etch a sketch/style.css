@@ -16,6 +16,14 @@ body {
   box-sizing: border-box; /* Ensures that borders and padding are included in the element's dimensions, preventing layout issues. */
 }
 
+.header-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
 #grid-container {
   display: grid;
   width: 100%; /* Make the grid container responsive */
@@ -32,7 +40,7 @@ body {
 
 button {
   font-size: 16px;
+  font-weight: 700;
   padding: 10px 20px;
-  margin-bottom: 20px;
   cursor: pointer;
 }
