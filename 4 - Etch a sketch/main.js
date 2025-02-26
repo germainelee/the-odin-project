@@ -53,9 +53,9 @@ function handleMouseEvent(event) {
   if (event.type == "mousedown") {
     event.target.style.background = "#" + getRandomColor(); // Color the square on click
   } else if (event.type == "mouseover") {
-    // If the square is unstyled (no background color), set it to #e0e0e0
+    // If the square is unstyled (no background color), set it to new color
     if (!event.target.style.background) {
-      event.target.style.background = "#e0e0e0";
+      event.target.style.background = "rgba(170, 170, 170, 0.2)";
     }
     // If the mouse is down, color the square
     if (isMouseDown) {
@@ -66,8 +66,8 @@ function handleMouseEvent(event) {
   else if (event.type == "mouseout") {
     // The event.target.style.background property may return the color in RGB format instead of the hex format. checks for both formats to ensure compatibility.
     if (
-      event.target.style.background === "rgb(224, 224, 224)" ||
-      event.target.style.background === "#e0e0e0"
+      event.target.style.background === "rgba(170, 170, 170, 0.2)" ||
+      event.target.style.background === "#aaaaaa33"
     ) {
       event.target.style.background = "";
     }
